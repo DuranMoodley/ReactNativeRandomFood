@@ -12,6 +12,7 @@ import { ERROR_TITLE, ERROR_MESSAGE_FIELDS, UNEXPECTED_ERROR, EMAIL_ERROR } from
 
 // External Imports.
 import axios from 'axios';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 // Styles.
 import RegisterStyles from './Register.styles';
@@ -91,7 +92,8 @@ const Register: React.FC<Props> = ({
 	}
 
 	return (
-		<View style={containerStyle}>
+		<KeyboardAwareScrollView>
+			<View style={containerStyle}>
 				<ImageBackground source={require('../assets/Ellipse.png')} resizeMode="cover" style={imageBackgroundStyle}>
 					<TouchableOpacity onPress={() => navigation.goBack()}>
 						<Image style={backImageStyle} source={require('../assets/back.png')} />
@@ -99,33 +101,20 @@ const Register: React.FC<Props> = ({
 					<Text style={registerHeadingTextStyle as TextStyle}>Register</Text>
 					<Image style={personImageStyle as ImageStyle} source={require('../assets/personImage1_big.png')} />
 				</ImageBackground>
-				<KeyboardAvoidingView
-					behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-					style={[containerStyle, {marginTop: 35}]}>
-					{/* <ScrollView
-						showsVerticalScrollIndicator={false}
-						automaticallyAdjustKeyboardInsets={true}
-						style={{
-							flex: 1,
-						}}
-						contentContainerStyle={{
-							flexGrow: 1,
-						}}> */}
-						<View>
+				<View style={[{marginTop: 35}]}>
 						<CustomInputText ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} inputType='normal' placeholderText='muncher' labelText='username' value={username} onChangeText={setUsername} />
 						<CustomInputText  ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
 						
 						<CustomInputText  ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
 						<CustomButton buttonText='Register' buttonType='primary' onButtonPress={registerUser} />
-						</View>
-					</KeyboardAvoidingView>
-
 						{isLoading && <ActivityIndicator size="small" color="#00ff00" style={{ position: 'absolute', alignSelf: 'center' }} />}
 						<TouchableOpacity onPress={() => navigation.navigate('Login')}>
 							<Text style={havingTroubleTextStyle as TextStyle}>Have an account? <Text style={boldTextStyle as TextStyle}>Login</Text></Text>
 						</TouchableOpacity>
 					{/* </ScrollView> */}
-		</View>
+				</View>
+			</View>
+		</KeyboardAwareScrollView>
 	)
 }
 
