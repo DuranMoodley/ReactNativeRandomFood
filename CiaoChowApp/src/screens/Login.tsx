@@ -36,7 +36,9 @@ const Login: React.FC<Props> = ({
 		personImage,
 		inputFormContainerStyle,
 		havingTroubleTextStyle,
-		boldTextStyle
+		boldTextStyle,
+		forgotPasswordContainer,
+		forgotPasswordTextStyle
 	} = LoginStyles();
 	const [email, setEmail] = useState<string>();
 	const [password, setPassword] = useState<string>();
@@ -91,6 +93,9 @@ const Login: React.FC<Props> = ({
 					<View style={inputFormContainerStyle}>
 						<CustomInputText  firstField={true} refValue={lastEmailRef} inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
 						<CustomInputText  keyBoardReturn='done' refValue={lastEmailRef} onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
+						<TouchableOpacity style={forgotPasswordContainer}>
+							<Text style={forgotPasswordTextStyle as TextStyle}>Forgot Password</Text>
+						</TouchableOpacity>
 						<CustomButton buttonText='Login' buttonType='primary' onButtonPress={loginUser} />
 						{isLoading && <ActivityIndicator size="small" color="#00ff00" />}
 						<TouchableOpacity onPress={() => navigation.goBack()}>

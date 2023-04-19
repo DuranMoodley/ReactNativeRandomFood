@@ -4,6 +4,9 @@ export default () => {
 			flex: 1,
 			backgroundColor: "white"
 		},
+		forgotPasswordContainer:{
+			paddingHorizontal: 20
+		},
 		scrollViewStyle: {
 			flex: 1
 		},
@@ -43,6 +46,14 @@ export default () => {
 			fontWeight: "400",
 			marginTop: 25,
 			textAlign: 'center'
+		},
+		forgotPasswordTextStyle: {
+			color: "#4CAD73",
+			fontSize: 12,
+			fontWeight: "400",
+			marginTop: 6,
+			paddingHorizontal: 20,
+			alignSelf:'flex-end',
 		},
 		boldTextStyle: {
 			fontWeight: "700",

@@ -52,7 +52,7 @@ export default () => {
 			backgroundColor: "#BDBDBD"
 		},
 		descriptionTextStyle: {
-			marginTop: 30,
+			marginTop: 18,
 			marginHorizontal: 28,
 			color: "#828282",
 			fontWeight: '400',
