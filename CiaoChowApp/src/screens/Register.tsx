@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import React, { useState, useRef } from 'react';
-import { ImageBackground, View, Text, Image, TouchableOpacity, ScrollView, Alert, ActivityIndicator, ImageStyle, ViewStyle, TextStyle, KeyboardAvoidingView, Platform } from 'react-native';
+import { ImageBackground, View, Text, Image, TouchableOpacity, ScrollView, Alert, ActivityIndicator, ImageStyle, ViewStyle, TextStyle, KeyboardAvoidingView, Platform, TextInput } from 'react-native';
 import { BASEURL, validateEmail } from '../utils/utils';
 import CustomButton from '../components/CustomButton';
 import { ERROR_TITLE, ERROR_MESSAGE_FIELDS, UNEXPECTED_ERROR, EMAIL_ERROR } from '../utils/messages';
@@ -31,13 +31,10 @@ const Register: React.FC<Props> = ({
 
 	const {
 		containerStyle,
-		scrollViewStyle,
 		imageBackgroundStyle,
 		backImageStyle,
 		personImageStyle,
-		headerContainerStyle,
 		registerHeadingTextStyle,
-		formInputStyle,
 		havingTroubleTextStyle,
 		boldTextStyle
 	} = RegisterStyles();
@@ -46,7 +43,8 @@ const Register: React.FC<Props> = ({
 	const [isLoading, setIsLoading] = useState<boolean>();
 	const [email, setEmail] = useState<string>();
 	const [password, setPassword] = useState<string>();
-	const billingFirstNameInput = useRef(null);
+	const lastEmailRef = useRef<typeof TextInput>();
+	const lastPasswordlRef = useRef<typeof TextInput>();
 
 	const alert = (heading: string, message: string) => {
 		Alert.alert(
@@ -90,9 +88,9 @@ const Register: React.FC<Props> = ({
 			alert(ERROR_TITLE, ERROR_MESSAGE_FIELDS);
 		}
 	}
-
+	
 	return (
-		<KeyboardAwareScrollView>
+		<KeyboardAwareScrollView style={{backgroundColor: 'white'}}>
 			<View style={containerStyle}>
 				<ImageBackground source={require('../assets/Ellipse.png')} resizeMode="cover" style={imageBackgroundStyle}>
 					<TouchableOpacity onPress={() => navigation.goBack()}>
@@ -102,16 +100,15 @@ const Register: React.FC<Props> = ({
 					<Image style={personImageStyle as ImageStyle} source={require('../assets/personImage1_big.png')} />
 				</ImageBackground>
 				<View style={[{marginTop: 35}]}>
-						<CustomInputText ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} inputType='normal' placeholderText='muncher' labelText='username' value={username} onChangeText={setUsername} />
-						<CustomInputText  ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
+						<CustomInputText firstField={true} refValue={lastEmailRef} inputType='normal' placeholderText='muncher' labelText='username' value={username} onChangeText={setUsername} />
+						<CustomInputText  refValue={lastEmailRef} onSubmit={() =>lastPasswordlRef?.current?.focus() } inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
 						
-						<CustomInputText  ref={billingFirstNameInput} onSubmitEditing={() => {billingFirstNameInput?.current?.focus()}} onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
+						<CustomInputText keyBoardReturn='done'  refValue={lastPasswordlRef} onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
 						<CustomButton buttonText='Register' buttonType='primary' onButtonPress={registerUser} />
 						{isLoading && <ActivityIndicator size="small" color="#00ff00" style={{ position: 'absolute', alignSelf: 'center' }} />}
 						<TouchableOpacity onPress={() => navigation.navigate('Login')}>
 							<Text style={havingTroubleTextStyle as TextStyle}>Have an account? <Text style={boldTextStyle as TextStyle}>Login</Text></Text>
 						</TouchableOpacity>
-					{/* </ScrollView> */}
 				</View>
 			</View>
 		</KeyboardAwareScrollView>

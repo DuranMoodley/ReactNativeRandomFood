@@ -9,7 +9,6 @@ export default () => {
 		},
 		imageBackgroundStyle: {
 			height: 400,
-			//backgroundColor:'red'
 		},
 		backImageStyle: {
 			width: 6,
@@ -32,9 +31,6 @@ export default () => {
 			marginTop: 230,
 			color: "#FFFFFF",
 			marginLeft: 20,
-		},
-		formInputStyle: {
-			//flex: 1
 		},
 		havingTroubleTextStyle: {
 			color: "#4CAD73",

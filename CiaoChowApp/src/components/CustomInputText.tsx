@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import React, {useRef} from 'react';
-import { View, Text, TextStyle, TextInput, TextInputProps, Image, ViewStyle } from 'react-native';
+import { View, Text, TextStyle, TextInput, TextInputProps, Image, ViewStyle, ReturnKeyTypeOptions } from 'react-native';
 
 // Styles.
 import CustomInputTextStyles from './CustomInputText.styles';
@@ -16,9 +16,11 @@ type Props = {
 	value: string | undefined;
 	labelTopSpacing?: boolean | undefined;
 	placeholderText: string;
-	ref: any;
+	firstField?: boolean;
 	inputType: "normal" | "password";
-	onSubmitEditing: () => void;
+	refValue?: any;
+	onSubmit?: () => void;
+	keyBoardReturn?: string;
 };
 
 const CustomInputText: React.FC<Props> = ({
@@ -28,8 +30,10 @@ const CustomInputText: React.FC<Props> = ({
 	labelTopSpacing,
 	placeholderText,
 	inputType,
-	ref,
-	onSubmitEditing
+	firstField = false,
+	refValue,
+	onSubmit,
+	keyBoardReturn = "next"
 }) => {
 
 	const {
@@ -40,47 +44,41 @@ const CustomInputText: React.FC<Props> = ({
 		passwordImageStyle
 	} = CustomInputTextStyles(labelTopSpacing);
 
-	let lastNameRef = useRef();
-
 	return (
 		<View>
 			<Text style={textInputLabelStyle as TextStyle}>{labelText}</Text>
 			{
 				inputType === 'normal' ?
 					<TextInput
-						ref={(input) => {ref = input;}}
 						placeholderTextColor={"#BDBDBD"}
 						placeholderStyle={{ marginLeft: 9 }}
 						style={textInputStyle as TextStyle}
 						onChangeText={onChangeText}
 						value={value}
+						autoCapitalize='none'
+						autoCorrect={false}
+						onSubmitEditing={() => { firstField ? refValue?.current?.focus() : onSubmit()}}
 						blurOnSubmit={false}
-						returnKeyType="next"
-						onSubmitEditing={() => {
-							ref?.current?.focus();
-						}}
-						//onSubmitEditing={onSubmitEditing()}
+						ref={refValue}
+						returnKeyType={keyBoardReturn as ReturnKeyTypeOptions}
 						placeholder={placeholderText}
 						keyboardType="default"
 					/>
 					:
 					<View style={passwordContainerStyle as ViewStyle}>
 						<TextInput
-							ref={(input) => {lastNameRef = input;}}
 							placeholderTextColor={"#BDBDBD"}
 							placeholderStyle={{ marginLeft: 9 }}
 							style={textInputPasswordStyle as TextInputProps}
 							onChangeText={onChangeText}
 							value={value}
-							returnKeyType="next"
-							onSubmitEditing={() => {
-								lastNameRef?.focus();
-							}}
+							returnKeyType={keyBoardReturn as ReturnKeyTypeOptions}
 							placeholder={placeholderText}
 							keyboardType="default"
+							ref={refValue}
 							secureTextEntry
 						/>
-						<Image style={passwordImageStyle} source={require('../assets/password.png')} />
+						<Image style={{position: 'absolute', right: 20}} source={require('../assets/password.png')} />
 					</View>
 			}
 

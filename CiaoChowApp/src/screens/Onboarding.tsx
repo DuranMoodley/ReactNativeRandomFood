@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import * as React from 'react';
-import { ImageBackground, View, Text, StyleSheet, Image, TextStyle, ViewStyle, ImageBackgroundProps } from 'react-native';
+import { ImageBackground, View, Text, StyleSheet, Image, TextStyle, ViewStyle, ImageBackgroundProps, StatusBar } from 'react-native';
 import CustomButton from '../components/CustomButton';
 
 // Styles.
@@ -36,6 +36,7 @@ const OnBoarding: React.FC<Props> = ({
 
 	return (
 		<View style={containerStyle}>
+			<StatusBar backgroundColor="aqua" barStyle="light-content" />
 			<ImageBackground source={require('../assets/Ellipse.png')} resizeMode="cover" style={imageBackgroundStyle as ImageBackgroundProps}>
 				<View style={headerStyle as ViewStyle}>
 					<Text style={textStyle as TextStyle}>CiaoChow</Text>

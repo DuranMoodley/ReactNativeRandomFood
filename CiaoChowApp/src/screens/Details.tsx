@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ActivityIndicator, ViewStyle, TextStyle } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, ViewStyle, TextStyle, StatusBar } from 'react-native';
 import { BASEURL, randomNumberGeneration, getRandomItem } from '../utils/utils';
 import CustomButton from '../components/CustomButton';
 import { Food } from '../data/data';
@@ -93,6 +93,7 @@ const Details: React.FC<Props> = ({
 
 	return (
 		<View style={containerStyle}>
+			<StatusBar backgroundColor="aqua" barStyle="light-content" />
 			{
 				isLoading ?
 					<View style={emptyViewStyle as ViewStyle}>

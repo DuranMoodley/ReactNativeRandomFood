@@ -4,8 +4,8 @@
  */
 
 // Internal Imports.
-import React, { useState } from 'react';
-import { ImageBackground, View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput, ScrollView, Alert, ActivityIndicator, TextInputComponent, ViewStyle, TextStyle, StyleProp, ImageStyle } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { ImageBackground, View, Text, Image, TouchableOpacity, TextInput, Alert, ActivityIndicator, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { BASEURL } from '../utils/utils';
 import { ERROR_TITLE, ERROR_MESSAGE_FIELDS } from '../utils/messages';
 
@@ -16,6 +16,7 @@ import axios from 'axios';
 import LoginStyles from './Login.styles';
 import CustomInputText from '../components/CustomInputText';
 import CustomButton from '../components/CustomButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
 	navigation: {
@@ -28,8 +29,6 @@ const Login: React.FC<Props> = ({
 	navigation,
 }) => {
 	const {
-		containerStyle,
-		scrollViewStyle,
 		imageBackgroundStyle,
 		backButtonImageStyle,
 		imageViewContainerStyle,
@@ -42,6 +41,7 @@ const Login: React.FC<Props> = ({
 	const [email, setEmail] = useState<string>();
 	const [password, setPassword] = useState<string>();
 	const [isLoading, setIsLoading] = useState<boolean>();
+	const lastEmailRef = useRef<typeof TextInput>();
 
 	const alert = (heading: string, message: string) => {
 		Alert.alert(
@@ -78,8 +78,7 @@ const Login: React.FC<Props> = ({
 		}
 	}
 	return (
-		<View style={[containerStyle, { minHeight: 0 }]}>
-			<ScrollView style={scrollViewStyle}>
+		<KeyboardAwareScrollView style={{backgroundColor: 'white'}}>
 				<ImageBackground source={require('../assets/Ellipse.png')} resizeMode="cover" style={imageBackgroundStyle}>
 					<TouchableOpacity onPress={() => navigation.goBack()}>
 						<Image style={backButtonImageStyle} source={require('../assets/back.png')} />
@@ -90,8 +89,8 @@ const Login: React.FC<Props> = ({
 					</View>
 
 					<View style={inputFormContainerStyle}>
-						<CustomInputText inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
-						<CustomInputText onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
+						<CustomInputText  firstField={true} refValue={lastEmailRef} inputType='normal' placeholderText='yourmail@mail.com' labelText='email' value={email} onChangeText={setEmail} labelTopSpacing />
+						<CustomInputText  keyBoardReturn='done' refValue={lastEmailRef} onChangeText={setPassword} inputType='password' placeholderText='your password' labelTopSpacing labelText='password' value={password} />
 						<CustomButton buttonText='Login' buttonType='primary' onButtonPress={loginUser} />
 						{isLoading && <ActivityIndicator size="small" color="#00ff00" />}
 						<TouchableOpacity onPress={() => navigation.goBack()}>
@@ -99,8 +98,7 @@ const Login: React.FC<Props> = ({
 						</TouchableOpacity>
 					</View>
 				</ImageBackground>
-			</ScrollView>
-		</View>
+		</KeyboardAwareScrollView>
 	)
 }
 

@@ -66,8 +66,6 @@ export default () => {
 				width: 0,
 				height: -3,
 			},
-			shadowOpacity: 1.0,
-			shadowColor: '#000',
 			height: 92,
 			position: 'absolute',
 			bottom: 0,

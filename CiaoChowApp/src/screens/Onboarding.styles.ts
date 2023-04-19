@@ -18,7 +18,6 @@ export default () => {
 			color: "#FFFFFF",
 			textAlign: 'center',
 			lineHeight: 30,
-			//fontFamily:"Inter"
 		},
 		imageBackgroundStyle: {
 			height: '70%',
