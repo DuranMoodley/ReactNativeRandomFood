@@ -93,7 +93,7 @@ const Details: React.FC<Props> = ({
 
 	return (
 		<View style={containerStyle}>
-			<StatusBar backgroundColor="aqua" barStyle="light-content" />
+			<StatusBar barStyle="light-content" />
 			{
 				isLoading ?
 					<View style={emptyViewStyle as ViewStyle}>

@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import React, { useState, useRef } from 'react';
-import { ImageBackground, View, Text, Image, TouchableOpacity, ScrollView, Alert, ActivityIndicator, ImageStyle, ViewStyle, TextStyle, KeyboardAvoidingView, Platform, TextInput } from 'react-native';
+import { ImageBackground, View, Text, Image, TouchableOpacity, Alert, ActivityIndicator, ImageStyle, TextStyle, KeyboardAvoidingView, TextInput, ScrollView, Platform } from 'react-native';
 import { BASEURL, validateEmail } from '../utils/utils';
 import CustomButton from '../components/CustomButton';
 import { ERROR_TITLE, ERROR_MESSAGE_FIELDS, UNEXPECTED_ERROR, EMAIL_ERROR } from '../utils/messages';

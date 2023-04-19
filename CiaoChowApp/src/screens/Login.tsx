@@ -5,7 +5,7 @@
 
 // Internal Imports.
 import React, { useRef, useState } from 'react';
-import { ImageBackground, View, Text, Image, TouchableOpacity, TextInput, Alert, ActivityIndicator, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { ImageBackground, View, Text, Image, TouchableOpacity, TextInput, KeyboardAvoidingView, Alert, ActivityIndicator, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { BASEURL } from '../utils/utils';
 import { ERROR_TITLE, ERROR_MESSAGE_FIELDS } from '../utils/messages';
 
@@ -98,7 +98,7 @@ const Login: React.FC<Props> = ({
 						</TouchableOpacity>
 					</View>
 				</ImageBackground>
-		</KeyboardAwareScrollView>
+			</KeyboardAwareScrollView>
 	)
 }
 

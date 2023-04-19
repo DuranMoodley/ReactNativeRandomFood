@@ -36,7 +36,7 @@ const OnBoarding: React.FC<Props> = ({
 
 	return (
 		<View style={containerStyle}>
-			<StatusBar backgroundColor="aqua" barStyle="light-content" />
+			<StatusBar  barStyle="light-content" />
 			<ImageBackground source={require('../assets/Ellipse.png')} resizeMode="cover" style={imageBackgroundStyle as ImageBackgroundProps}>
 				<View style={headerStyle as ViewStyle}>
 					<Text style={textStyle as TextStyle}>CiaoChow</Text>
